@@ -1,60 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>Earning Bot</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Arial;
-      background: #f2f2f2;
-      padding: 15px;
-    }
-    .box {
-      background: #fff;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #28a745;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="box">
-    <h2>👋 Welcome</h2>
-    <p>Balance: ৳<span id="balance">0</span></p>
-  </div>
-
-  <div class="box">
-    <h3>📋 Task</h3>
-    <p>Click button to earn ৳5</p>
-    <button onclick="earn()">Complete Task</button>
-  </div>
-
-  <div class="box">
-    <h3>💰 Withdraw</h3>
-    <p>Minimum withdraw ৳100</p>
-    <button disabled>Withdraw</button>
-  </div>
-
 <script>
-  let balance = 0;
-  function earn() {
-    balance += 5;
-    document.getElementById("balance").innerText = balance;
-  }
-</script>
+let balance = 5;
+let taskRunning = false;
 
-</body>
-</html>
+function completeTask() {
+  if (taskRunning) return;
+  taskRunning = true;
+
+  alert("🔔 Ad দেখার পর ১০ সেকেন্ড অপেক্ষা করো");
+
+  // এখানে আপাতত fake ad
+  window.open("https://www.google.com", "_blank");
+
+  let seconds = 10;
+
+  let timer = setInterval(() => {
+    seconds--;
+
+    if (seconds <= 0) {
+      clearInterval(timer);
+      balance += 5;
+      document.getElementById("balance").innerText = balance;
+      alert("✅ ৳5 যোগ হয়েছে");
+      taskRunning = false;
+    }
+  }, 1000);
+}
+</script>
